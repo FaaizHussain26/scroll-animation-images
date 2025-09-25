@@ -12,14 +12,7 @@
             box-sizing: border-box;
         }
 
-        .hero-section {
-            height: 100vh;
-            width: 100%;
-            background-color: yellow;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+      
 
         #grid_projects {
             height: auto;
@@ -31,7 +24,7 @@
 
         .grid-row {
             display: grid;
-            grid-template-columns: repeat(5, var(--cell-size, 302px));
+            grid-template-columns: repeat(5, var(--cell-size, 20%));
             gap: 5px;
             margin: 0 auto 10px auto;
             justify-content: center;
@@ -57,20 +50,12 @@
             display: block;
         }
 
-        .section3 {
-            height: 80vh;
-            width: 100%;
-            background-color: blue;
-            padding: 10% 2%;
-        }
     </style>
 </head>
 
 <body>
 
-    <div class="hero-section">
-        <h2>Hi I'm hero</h2>
-    </div>
+  
 
     <div id="grid_projects">
         <!-- Row 1 -->
@@ -120,32 +105,15 @@
     </div>
 
 
-    <div class="section3">
-        <h1>section 3</h1>
-    </div>
+  
 
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <script>
-        // gsap.registerPlugin(ScrollTrigger);
 
-        // document.querySelectorAll(".grid-row").forEach((row) => {
-        //     ScrollTrigger.create({
-        //         trigger: row,
-        //         start: "top 80%",
-        //         end: "bottom 20%",
-        //         scrub: true,
-        //         onUpdate: (self) => {
-        //             let size = 220 * (1 + self.progress * 2.7); // width expand
-        //             let height = 150 * (1 + self.progress * 2.3); // height expand
-        //             row.style.setProperty("--cell-size", size + "px");
-        //             row.style.setProperty("--cell-height", height + "px");
-        //         }
-        //     });
-        // });
-        
+
         gsap.registerPlugin(ScrollTrigger);
 
         window.addEventListener("load", () => {
@@ -155,11 +123,19 @@
                     start: "top 80%",
                     end: "bottom 0%",
                     scrub: true,
+                    // onUpdate: (self) => {
+                    //     let size = 302 * (1 + self.progress * 2.5); // width expand
+                    //     let height = 150 * (1 + self.progress * 1.7); // height expand
+                    //     row.style.setProperty("--cell-size", size + "px");
+                    //     row.style.setProperty("--cell-height", height + "px");
+                    // }
                     onUpdate: (self) => {
-                        let size = 302 * (1 + self.progress * 2.5); // width expand
-                        let height = 150 * (1 + self.progress * 1.7); // height expand
-                        row.style.setProperty("--cell-size", size + "px");
-                        row.style.setProperty("--cell-height", height + "px");
+                        // 20% base width, scaled with progress
+                        let sizePercent = 20 * (1 + self.progress * 2.5);
+                        let heightPx = 150 * (1 + self.progress * 1.7); // keep height in px
+
+                        row.style.setProperty("--cell-size", sizePercent + "%");
+                        row.style.setProperty("--cell-height", heightPx + "px");
                     }
                 });
             });
