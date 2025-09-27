@@ -5,144 +5,281 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grid Scroll</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-      
+   #grid_projects {
+    width: 100%;
+    background: #000;
+    padding: 20px;
+    overflow-x: hidden;
+}
 
-        #grid_projects {
-            height: auto;
-            width: 100%;
-            overflow-x: hidden;
-            background: #000;
-            padding: 20px;
-        }
+.grid-row {
+    display: grid;
+    grid-template-columns: repeat(5, var(--cell-size, 20%));
+    gap: 20px;
+    margin: 0 auto 10px auto;
+    justify-content: center;
+}
 
-        .grid-row {
-            display: grid;
-            grid-template-columns: repeat(5, var(--cell-size, 20%));
-            gap: 5px;
-            margin: 0 auto 10px auto;
-            justify-content: center;
-            transition: grid-template-columns 0.3s ease;
-        }
+.holder-img {
+    width: 100%;
+    height: var(--cell-height, 220px);
+    overflow: hidden;
+    transition: height 0.3s ease; /* smooth vertical growth */
+}
 
-        .holder-img {
-            width: 100%;
-            height: var(--cell-height, 150px);
-            overflow: hidden;
-        }
+.holder-img a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
 
-        .holder-img a {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
+.holder-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
 
-        .holder-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-    </style>
-</head>
-
-<body>
-
-  
-
-    <div id="grid_projects">
-        <!-- Row 1 -->
-        <div class="grid-row">
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1015/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1016/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1018/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1020/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1024/400/300" alt=""></a></div>
-        </div>
-
-        <!-- Row 2 -->
-        <div class="grid-row">
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1025/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1031/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1033/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1035/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1037/400/300" alt=""></a></div>
-        </div>
-
-        <!-- Row 3 -->
-        <div class="grid-row">
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1040/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1042/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1043/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1044/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1045/400/300" alt=""></a></div>
-        </div>
-
-        <!-- Row 4 -->
-        <div class="grid-row">
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1049/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1050/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1051/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1052/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1053/400/300" alt=""></a></div>
-        </div>
-
-        <!-- Row 5 -->
-        <div class="grid-row">
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1055/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1056/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1057/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1058/400/300" alt=""></a></div>
-            <div class="holder-img"><a href="#"><img src="https://picsum.photos/id/1059/400/300" alt=""></a></div>
-        </div>
-    </div>
-
-
-  
-
+.container {
+    height: 1000px;
+    background: red;
+}
+</style>
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-    <script>
+    <script src="
+    https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js
+    "></script>
+</head>
+
+<body>
+
+<div id="grid_projects">
+    <div class="container"></div>
+  <!-- Row 1 -->
+
+  <div class="grid-row" id="row-1">
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/945ac227-46a5-4b0a-28df-1e21fa473800/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/d83a744d-88b3-44ad-b22b-8b81b8779100/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/a54a7490-8c8f-4d2b-6ba4-d6ae0cbcf400/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/791acb53-60a1-41ee-a781-742b6968f500/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/563a6d86-9539-4687-c808-f901793dfe00/public" alt=""></a></div>
+  </div>
+
+  <!-- Row 2 -->
+  <div class="grid-row" id="row-2">
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/92bae3f9-5e21-443f-2721-5f160acac300/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/49ed6976-7f29-4b18-84a5-044ea5224a00/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/24984696-8847-404f-b7af-1d9e0e02f400/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/81eb9048-01c6-4051-762e-7e26dc23b300/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/ae6c2aa9-ec00-47bb-41dc-48ea64298800/public" alt=""></a></div>
+  </div>
+
+  <!-- Row 3 -->
+  <div class="grid-row" id="row-3">
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/5427c446-4b5e-44fc-7f38-4fb9d3af0a00/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/ae828b56-a39c-4a7f-6871-da2b011c7e00/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/46cb32de-44e2-430c-d0a1-beba737b4a00/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/f2e641d3-a7ef-4661-57a7-a8b897839a00/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/3a6a6464-a1fa-4a43-9321-05882deb7000/public" alt=""></a></div>
+  </div>
+
+  <!-- Row 4 -->
+  <div class="grid-row" id="row-4">
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/193ac6fd-fb2f-4b67-e07e-3641f6108900/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/510fe8d7-812e-4d1d-0c21-5a7247801200/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/5108b859-5e7c-4f4e-6dc4-3f461dbde500/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/f2b79564-8029-40c7-5fc2-4cf6d0342500/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/9eb1eaab-70f3-4d82-16c8-163889a94700/public" alt=""></a></div>
+  </div>
+
+  <!-- Row 5 -->
+  <div class="grid-row" id="row-5">
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/e624c650-0702-4897-a2d3-0a4dd4f38600/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/a24c3b77-67e6-4844-e814-771012180000/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/8adb3633-8369-40e3-2263-657c67f9db00/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/3ee26459-d385-4846-d8d4-293a16d68100/public" alt=""></a></div>
+    <div class="holder-img"><a href="#"><img src="https://imagedelivery.net/eUBNzkU4D6pa5H8GcYQhQQ/a0bef83c-be2f-405f-85b8-d44eea63fe00/public" alt=""></a></div>
+  </div>
+</div>
+
+<div class="container"></div>
 
 
-        gsap.registerPlugin(ScrollTrigger);
+    
+<script>
+ gsap.registerPlugin(ScrollTrigger);
 
-        window.addEventListener("load", () => {
-            document.querySelectorAll(".grid-row").forEach((row) => {
-                ScrollTrigger.create({
-                    trigger: row,
-                    start: "top 80%",
-                    end: "bottom 0%",
-                    scrub: true,
-                    // onUpdate: (self) => {
-                    //     let size = 302 * (1 + self.progress * 2.5); // width expand
-                    //     let height = 150 * (1 + self.progress * 1.7); // height expand
-                    //     row.style.setProperty("--cell-size", size + "px");
-                    //     row.style.setProperty("--cell-height", height + "px");
-                    // }
-                    onUpdate: (self) => {
-                        // 20% base width, scaled with progress
-                        let sizePercent = 20 * (1 + self.progress * 2.5);
-                        let heightPx = 150 * (1 + self.progress * 1.7); // keep height in px
+let lenis;
+if (typeof Lenis !== 'undefined') {
+    lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+        mouseMultiplier: 1,
+        smoothTouch: false,
+        touchMultiplier: 2,
+        infinite: false,
+    });
 
-                        row.style.setProperty("--cell-size", sizePercent + "%");
-                        row.style.setProperty("--cell-height", heightPx + "px");
-                    }
+    // Lenis animation frame
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // GSAP integration with Lenis
+    lenis.on('scroll', ScrollTrigger.update);
+} else {
+    console.warn('Lenis not loaded, using default scroll behavior');
+}
+
+window.addEventListener("load", () => {
+    let row2Started = false;
+    let row3Started = false;
+    let row4Started = false;
+    let row5Started = false;
+
+    console.log(row2Started, row3Started, row4Started, row5Started);
+    
+    // Row 1 animation
+    document.querySelectorAll("#row-1").forEach((row) => {
+        ScrollTrigger.create({
+            trigger: row,
+            start: "top 80%",
+            end: "bottom 20%",
+            scrub: 0.5,
+            onUpdate: (self) => {
+                let newSize = 20 + self.progress * 50; 
+                let newHeight = 300 + self.progress * 200;
+
+                row.style.setProperty("--cell-size", newSize + "%");
+                row.querySelectorAll(".holder-img").forEach(cell => {
+                    cell.style.setProperty("--cell-height", newHeight + "px");
+                    cell.style.height = newHeight + "px"; 
                 });
-            });
 
-            ScrollTrigger.refresh();
+                if (newSize >= 50 && !row2Started) {
+                    row2Started = true;
+                    startRow2Animation();
+                }
+            },
         });
-    </script>
+    });
+
+    function startRow2Animation() {
+        document.querySelectorAll("#row-2").forEach((row) => {
+            ScrollTrigger.create({
+                trigger: row,
+                start: "top 80%",
+                end: "bottom 20%",
+                scrub: 0.5,
+                onUpdate: (self) => {
+                    let newSize = 20 + self.progress * 50; 
+                    let newHeight = 300 + self.progress * 200;
+
+                    row.style.setProperty("--cell-size", newSize + "%");
+                    row.querySelectorAll(".holder-img").forEach(cell => {
+                        cell.style.setProperty("--cell-height", newHeight + "px");
+                        cell.style.height = newHeight + "px"; 
+                    });
+                    if (newSize >= 45 && !row3Started) {
+                        row3Started = true;
+                        startRow3Animation();
+                    }
+                },
+           
+            });
+        });
+    }
+
+    function startRow3Animation() {
+        document.querySelectorAll("#row-3").forEach((row) => {
+            ScrollTrigger.create({
+                trigger: row,
+                start: "top 80%",
+                end: "bottom 20%",
+                scrub: 0.5,
+                onUpdate: (self) => {
+                    let newSize = 20 + self.progress * 50; 
+                    let newHeight = 300 + self.progress * 200;
+
+                    row.style.setProperty("--cell-size", newSize + "%");
+                    row.querySelectorAll(".holder-img").forEach(cell => {
+                        cell.style.setProperty("--cell-height", newHeight + "px");
+                        cell.style.height = newHeight + "px"; 
+                    });
+                    if (newSize >= 40 && !row4Started) {
+                        row4Started = true;
+                        startRow4Animation();
+                    }
+                },
+              
+            });
+        });
+    }
+
+    function startRow4Animation() {
+        document.querySelectorAll("#row-4").forEach((row) => {
+            ScrollTrigger.create({
+                trigger: row,
+                start: "top 80%",
+                end: "bottom 20%",
+                scrub: 0.5,
+                onUpdate: (self) => {
+                    let newSize = 20 + self.progress * 50; 
+                    let newHeight = 300 + self.progress * 200;
+
+                    row.style.setProperty("--cell-size", newSize + "%");
+                    row.querySelectorAll(".holder-img").forEach(cell => {
+                        cell.style.setProperty("--cell-height", newHeight + "px");
+                        cell.style.height = newHeight + "px"; 
+                    });
+                    if (newSize >= 38 && !row5Started) {
+                        row5Started = true;
+                        startRow5Animation();
+                    }
+                },
+              
+            });
+        });
+    }
+
+    function startRow5Animation() {
+        document.querySelectorAll("#row-5").forEach((row) => {
+            ScrollTrigger.create({
+                trigger: row,
+                start: "top 80%",
+                end: "bottom 20%",
+                scrub: 0.5,
+                onUpdate: (self) => {
+                    let newSize = 20 + self.progress * 50; 
+                    let newHeight = 300 + self.progress * 200;
+
+                    row.style.setProperty("--cell-size", newSize + "%");
+                    row.querySelectorAll(".holder-img").forEach(cell => {
+                        cell.style.setProperty("--cell-height", newHeight + "px");
+                        cell.style.height = newHeight + "px"; 
+                    });
+                },
+              
+            });
+        });
+    }
+});
+</script>
 </body>
 
 </html>
